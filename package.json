@@ -1,0 +1,24 @@
+{
+  "name": "flappy-bird",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "reload -b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dairito90/flappy-bird.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dairito90/flappy-bird/issues"
+  },
+  "homepage": "https://github.com/dairito90/flappy-bird#readme",
+  "devDependencies": {
+    "reload": "^1.1.1"
+  }
+}
