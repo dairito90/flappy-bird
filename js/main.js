@@ -8,10 +8,12 @@ window.onload = function(){
   const environment = new Environment(c, ctx);
   const bird = new Bird(250, 300, ctx);
   const pipes = [];
+  let pipeSet = generateRandomPipes(ctx, c.width, c.height);
+  pipes.push(pipeSet.top, pipeSet.bottom);
   setInterval(function(){
     let pipeSet = generateRandomPipes(ctx, c.width, c.height);
     pipes.push(pipeSet.top, pipeSet.bottom);
-  }, 3000);
+}, 2600);
   gameLoop();
 
 
@@ -26,12 +28,14 @@ window.onload = function(){
       pipe1.update();
       pipe1.render();
     });
-    bird.update();
+    bird.update(pipes);
     bird.render();
-    if (detectCollisions(bird, pipes)) {
-      alert("you lose!");
-      window.location = '/';
+    if (bird.dead){
+        console.log("you lose");
+        drawGameOver(ctx,c);
+        return;
     }
+
     window.requestAnimationFrame(gameLoop);
   }
 };
@@ -44,26 +48,7 @@ function generateRandomPipes(ctx, canvasWidth, canvasHeight){
   returnVal.bottom = new Pipe(canvasWidth, canvasHeight+5-lengthBottom, lengthBottom, 4, ctx);
   return returnVal;
 }
-
-function detectCollisions(bird, pipes){
-  for(var i = 0; i < pipes.length; i++){
-    let e = pipes[i];
-    let highPipe = e.ypos <= 0;
-    let x0 = e.xpos, x1 = e.xpos+e.width;
-    if (highPipe ){
-      let y0 = e.ypos + e.length;
-      let alpha = bird.x;
-      let beta = bird.y - bird.height/2;
-      if (alpha > x0 && alpha < x1 && beta < y0){
-        return true;
-      }
-    }
-    else{
-      let y2 = e.ypos;
-      let a = bird.x;
-      let b = bird.y + bird.height/2;
-      if (a > x0 && a < x1 && b > y2) return true;
-    }
-  }
-  return false;
+function drawGameOver(ctx,c){
+    ctx.font = "30px Verdana";
+    ctx.fillText("Game Over!!"c.width/2, c.height/2);
 }
