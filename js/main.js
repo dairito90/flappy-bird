@@ -50,5 +50,5 @@ function generateRandomPipes(ctx, canvasWidth, canvasHeight){
 }
 function drawGameOver(ctx,c){
     ctx.font = "30px Verdana";
-    ctx.fillText("Game Over!!"c.width/2, c.height/2);
+    ctx.fillText("Game Over!!",c.width/2, c.height/2);
 }
